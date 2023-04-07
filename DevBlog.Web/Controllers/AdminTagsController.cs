@@ -22,6 +22,7 @@ namespace DevBlog.Web.Controllers
 
         [HttpPost]
         [ActionName("Add")]
+        //Add Tag Data
         public IActionResult Add(AddTagRequest addTagRequest)
         {
             //Mapping AddTagRequest to Tag domain model
@@ -40,6 +41,7 @@ namespace DevBlog.Web.Controllers
 
         [HttpGet]
         [ActionName("List")]
+        //List or View Tag Data
         public IActionResult List() 
         {
             //use dbContext to read the tags
@@ -48,6 +50,7 @@ namespace DevBlog.Web.Controllers
         }
 
         [HttpGet]
+        //Get Tag Data
         public IActionResult Edit(Guid Id)
         {
             var tag = blogDbContext.Tags.FirstOrDefault(x => x.Id == Id);
@@ -64,6 +67,8 @@ namespace DevBlog.Web.Controllers
             return View(null);
         }
 
+        [HttpPost]
+        //Edit Tag Data
         public IActionResult Edit(EditTagRequest editTagRequest)
         {
             var tag = new Tag
@@ -80,6 +85,21 @@ namespace DevBlog.Web.Controllers
 
                 //save changes
                 blogDbContext.SaveChanges();
+                return RedirectToAction("List");
+            }
+            return RedirectToAction("Edit", new {id = editTagRequest.Id});
+        }
+
+        //Delete Tag Data
+        public IActionResult Delete(EditTagRequest editTagRequest)
+        {
+            var tag = blogDbContext.Tags.Find(editTagRequest.Id);
+
+            if(tag!=null)
+            {
+                blogDbContext.Tags.Remove(tag);
+                blogDbContext.SaveChanges() ;
+
                 return RedirectToAction("List");
             }
             return RedirectToAction("Edit", new {id = editTagRequest.Id});
