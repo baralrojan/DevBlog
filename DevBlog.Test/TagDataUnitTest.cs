@@ -4,15 +4,12 @@ using DevBlog.Web.Models.Domain;
 using DevBlog.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace DevBlog.Web.Tests.Controllers
+
+namespace DevBlog.Test
 {
     [TestClass]
-    public class AdminTagsControllerTests
+    public class TagDataUnitTest
     {
         private BlogDbContext _dbContext;
         private AdminTagsController _controller;
@@ -21,7 +18,7 @@ namespace DevBlog.Web.Tests.Controllers
         public void Initialize()
         {
             var options = new DbContextOptionsBuilder<BlogDbContext>()
-                .UseInMemoryDatabase(databaseName: "test_database")
+                .UseInMemoryDatabase(databaseName: "UnitTestDatabase")
                 .Options;
 
             _dbContext = new BlogDbContext(options);
