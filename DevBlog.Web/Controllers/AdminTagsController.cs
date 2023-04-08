@@ -3,6 +3,7 @@ using DevBlog.Web.Models.Domain;
 using DevBlog.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace DevBlog.Web.Controllers
 {
 
@@ -16,7 +17,6 @@ namespace DevBlog.Web.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-
             return View();
         }
 
@@ -90,6 +90,8 @@ namespace DevBlog.Web.Controllers
             return RedirectToAction("Edit", new {id = editTagRequest.Id});
         }
 
+
+
         //Delete Tag Data
         public IActionResult Delete(EditTagRequest editTagRequest)
         {
@@ -104,6 +106,10 @@ namespace DevBlog.Web.Controllers
             }
             return RedirectToAction("Edit", new {id = editTagRequest.Id});
         }
+
+
+
+
     }
 
 }
