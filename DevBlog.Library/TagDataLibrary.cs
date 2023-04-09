@@ -1,64 +1,68 @@
-﻿// Class library project
-
-using DevBlog.Web.Data;
+﻿using DevBlog.Web.Data;
 using DevBlog.Web.Models.Domain;
 using DevBlog.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
-namespace DevBlog.Library
+namespace DevBlog.Web.Controllers
 {
+
     public class TagDataLibrary : Controller
     {
-        private readonly BlogDbContext _blogDbContext;
-
+        private readonly BlogDbContext blogDbContext;
         public TagDataLibrary(BlogDbContext blogDbContext)
         {
-            _blogDbContext = blogDbContext;
+            this.blogDbContext = blogDbContext;
         }
-
         [HttpGet]
-        public IActionResult Add()
-        {
-            return View();
-        }
+      
 
         [HttpPost]
         [ActionName("Add")]
-        public IActionResult AddTag(AddTagRequest addTagRequest)
+        //Add Tag Data
+        public Tag Add(AddTagRequest addTagRequest)
         {
-            if (ModelState.IsValid)
+            //Mapping AddTagRequest to Tag domain model
+            var tag = new Tag
             {
-                var tag = new Tag
-                {
-                    Name = addTagRequest.Name,
-                    DisplayName = addTagRequest.DisplayName,
-                };
+                Name = addTagRequest.Name,
+                DisplayName = addTagRequest.DisplayName,
+            };
 
-                _blogDbContext.Tags.Add(tag);
-                _blogDbContext.SaveChanges();
+            blogDbContext.Tags.Add(tag);
+            //Context save to database
+            blogDbContext.SaveChanges();
+            return tag;
+        }
 
-                return RedirectToAction("List");
+        [HttpPost]
+        //Edit Tag Data
+        public Tag Edit(EditTagRequest editTagRequest)
+        {
+            var tag = new Tag
+            {
+                Id = editTagRequest.Id,
+                Name = editTagRequest.Name,
+                DisplayName = editTagRequest.DisplayName,
+            };
+            var existingTag = blogDbContext.Tags.Find(tag.Id);
+            if (existingTag != null)
+            {
+                existingTag.Name = tag.Name;
+                existingTag.DisplayName = tag.DisplayName;
+
+                //save changes
+                blogDbContext.SaveChanges();
+                return tag;
             }
-
-            return View(addTagRequest);
+            return tag;
         }
 
         [HttpGet]
-        [ActionName("List")]
-        public IActionResult ListTags()
+        //Get Tag Data
+        public bool Edit(Guid Id)
         {
-            var tags = _blogDbContext.Tags.ToList();
-            return View(tags);
-        }
-
-        [HttpGet]
-        public IActionResult Edit(Guid id)
-        {
-            var tag = _blogDbContext.Tags.FirstOrDefault(x => x.Id == id);
-
+            var tag = blogDbContext.Tags.FirstOrDefault(x => x.Id == Id);
             if (tag != null)
             {
                 var editTagRequest = new EditTagRequest
@@ -67,57 +71,32 @@ namespace DevBlog.Library
                     Name = tag.Name,
                     DisplayName = tag.DisplayName,
                 };
-
-                return View(editTagRequest);
+                return true;
             }
-
-            return RedirectToAction("List");
+            return false;
         }
 
-        [HttpPost]
-        public IActionResult EditTag(EditTagRequest editTagRequest)
+        //Delete Tag Data
+        public bool Delete(EditTagRequest editTagRequest)
         {
-            if (ModelState.IsValid)
-            {
-                var tag = new Tag
-                {
-                    Id = editTagRequest.Id,
-                    Name = editTagRequest.Name,
-                    DisplayName = editTagRequest.DisplayName,
-                };
-
-                var existingTag = _blogDbContext.Tags.Find(tag.Id);
-
-                if (existingTag != null)
-                {
-                    existingTag.Name = tag.Name;
-                    existingTag.DisplayName = tag.DisplayName;
-
-                    _blogDbContext.SaveChanges();
-
-                    return RedirectToAction("List");
-                }
-
-                return RedirectToAction("List");
-            }
-
-            return View(editTagRequest);
-        }
-
-        [HttpPost]
-        public IActionResult Delete(EditTagRequest editTagRequest)
-        {
-            var tag = _blogDbContext.Tags.Find(editTagRequest.Id);
+            var tag = blogDbContext.Tags.Find(editTagRequest.Id);
 
             if (tag != null)
             {
-                _blogDbContext.Tags.Remove(tag);
-                _blogDbContext.SaveChanges();
+                blogDbContext.Tags.Remove(tag);
+                blogDbContext.SaveChanges();
 
-                return RedirectToAction("List");
+                return true;
             }
-
-            return RedirectToAction("List");
+            return false;
         }
+
+
     }
-}
+
+
+
+
+    }
+
+
