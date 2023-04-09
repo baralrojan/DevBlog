@@ -5,6 +5,6 @@
 # Completed Crud Operation for Tag data
 # Completed Unit Testing using MSTest for Tag Crud Operation
 # Minimum Integration Test Added
-# Added library class and added classes but cannot implement it for unit testing. Only able to run minimum test.
+# Added library class and added classes but cannot implement it for unit testing. Only 3 test cases passed when I did that.
 # I did unit testing and integration test both via controller from my main project.
 # Got one day extension to complete check-in
