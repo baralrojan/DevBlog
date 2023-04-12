@@ -10,3 +10,5 @@ C:\Users\baral\OneDrive\Desktop\advanced_web\DevBlog\DevBlog.Library\obj\Debug\n
 C:\Users\baral\OneDrive\Desktop\advanced_web\DevBlog\DevBlog.Library\obj\Debug\net7.0\refint\DevBlog.Library.dll
 C:\Users\baral\OneDrive\Desktop\advanced_web\DevBlog\DevBlog.Library\obj\Debug\net7.0\DevBlog.Library.pdb
 C:\Users\baral\OneDrive\Desktop\advanced_web\DevBlog\DevBlog.Library\obj\Debug\net7.0\ref\DevBlog.Library.dll
+C:\Users\baral\OneDrive\Desktop\advanced_web\DevBlog\DevBlog.Library\bin\Debug\net7.0\DevBlog.Library.runtimeconfig.json
+C:\Users\baral\OneDrive\Desktop\advanced_web\DevBlog\DevBlog.Library\obj\Debug\net7.0\DevBlog.Library.genruntimeconfig.cache

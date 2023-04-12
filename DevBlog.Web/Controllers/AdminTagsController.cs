@@ -1,4 +1,6 @@
-﻿using DevBlog.Web.Data;
+﻿
+using DevBlog.Library.Services;
+using DevBlog.Web.Data;
 using DevBlog.Web.Models.Domain;
 using DevBlog.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +12,11 @@ namespace DevBlog.Web.Controllers
     public class AdminTagsController : Controller
     {
         private readonly BlogDbContext blogDbContext;
-        public AdminTagsController(BlogDbContext blogDbContext)
+        private readonly TagDataServices tagDataServices;
+        public AdminTagsController(BlogDbContext blogDbContext,TagDataServices tagDataServices)
         {
             this.blogDbContext= blogDbContext;
+            this.tagDataServices= tagDataServices;
         }
         [HttpGet]
         public IActionResult Add()
@@ -32,10 +36,8 @@ namespace DevBlog.Web.Controllers
                 DisplayName = addTagRequest.DisplayName,
             };
 
-            blogDbContext.Tags.Add(tag);
+            bool result = tagDataServices.AddTag(tag);
             //Context save to database
-            blogDbContext.SaveChanges();
-
             return RedirectToAction("List");
         }
 
@@ -45,7 +47,7 @@ namespace DevBlog.Web.Controllers
         public IActionResult List() 
         {
             //use dbContext to read the tags
-            var tags = blogDbContext.Tags.ToList();
+            var tags = tagDataServices.ListTags();
             return View(tags);
         }
 
@@ -53,16 +55,10 @@ namespace DevBlog.Web.Controllers
         //Get Tag Data
         public IActionResult Edit(Guid Id)
         {
-            var tag = blogDbContext.Tags.FirstOrDefault(x => x.Id == Id);
+            var tag = tagDataServices.GetTag(Id);
             if(tag!=null) 
             {
-                var editTagRequest = new EditTagRequest
-                {
-                    Id = tag.Id,
-                    Name = tag.Name,
-                    DisplayName= tag.DisplayName,
-                };
-                return View(editTagRequest);
+                return View(tag);
             }
             return View(null);
         }
@@ -71,37 +67,23 @@ namespace DevBlog.Web.Controllers
         //Edit Tag Data
         public IActionResult Edit(EditTagRequest editTagRequest)
         {
-            var tag = new Tag
+            if (tagDataServices.EditTag(editTagRequest))
             {
-                Id = editTagRequest.Id,
-                Name = editTagRequest.Name,
-                DisplayName = editTagRequest.DisplayName,
-            };
-            var existingTag = blogDbContext.Tags.Find(tag.Id);
-            if(existingTag!=null) 
-            {
-                existingTag.Name = tag.Name;
-                existingTag.DisplayName = tag.DisplayName;
-
-                //save changes
-                blogDbContext.SaveChanges();
                 return RedirectToAction("List");
             }
-            return RedirectToAction("Edit", new {id = editTagRequest.Id});
-        }
 
+            // handle case when tag not found
+            return NotFound();
+        }
 
 
         //Delete Tag Data
         public IActionResult Delete(EditTagRequest editTagRequest)
         {
-            var tag = blogDbContext.Tags.Find(editTagRequest.Id);
+            var result = tagDataServices.DeleteTag(editTagRequest.Id);
 
-            if(tag!=null)
+            if(result)
             {
-                blogDbContext.Tags.Remove(tag);
-                blogDbContext.SaveChanges() ;
-
                 return RedirectToAction("List");
             }
             return RedirectToAction("Edit", new {id = editTagRequest.Id});

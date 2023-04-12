@@ -1,12 +1,18 @@
+using DevBlog.Library.Services;
 using DevBlog.Web.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<TagDataServices>();
 builder.Services.AddDbContext<BlogDbContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("BlogDbConnectionString")));
+options.UseSqlServer(builder.Configuration.GetConnectionString("BlogDbConnectionString"),
+                     options => options.MigrationsAssembly("DevBlog.Web")));
+
 
 var app = builder.Build();
 

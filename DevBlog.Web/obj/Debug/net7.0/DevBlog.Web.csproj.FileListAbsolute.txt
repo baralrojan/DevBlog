@@ -73,3 +73,13 @@ C:\Users\baral\OneDrive\Desktop\advanced_web\DevBlog\DevBlog.Web\obj\Debug\net7.
 C:\Users\baral\OneDrive\Desktop\advanced_web\DevBlog\DevBlog.Web\obj\Debug\net7.0\DevBlog.Web.pdb
 C:\Users\baral\OneDrive\Desktop\advanced_web\DevBlog\DevBlog.Web\obj\Debug\net7.0\DevBlog.Web.genruntimeconfig.cache
 C:\Users\baral\OneDrive\Desktop\advanced_web\DevBlog\DevBlog.Web\obj\Debug\net7.0\ref\DevBlog.Web.dll
+C:\Users\baral\OneDrive\Desktop\advanced_web\DevBlog\DevBlog.Web\bin\Debug\net7.0\DevBlog.Library.dll
+C:\Users\baral\OneDrive\Desktop\advanced_web\DevBlog\DevBlog.Web\bin\Debug\net7.0\DevBlog.Library.pdb
+C:\Users\baral\OneDrive\Desktop\advanced_web\DevBlog\DevBlog.Web\bin\Debug\net7.0\EntityFramework.SqlServer.dll
+C:\Users\baral\OneDrive\Desktop\advanced_web\DevBlog\DevBlog.Web\bin\Debug\net7.0\EntityFramework.dll
+C:\Users\baral\OneDrive\Desktop\advanced_web\DevBlog\DevBlog.Web\bin\Debug\net7.0\System.Data.SqlClient.dll
+C:\Users\baral\OneDrive\Desktop\advanced_web\DevBlog\DevBlog.Web\bin\Debug\net7.0\runtimes\win-arm64\native\sni.dll
+C:\Users\baral\OneDrive\Desktop\advanced_web\DevBlog\DevBlog.Web\bin\Debug\net7.0\runtimes\win-x64\native\sni.dll
+C:\Users\baral\OneDrive\Desktop\advanced_web\DevBlog\DevBlog.Web\bin\Debug\net7.0\runtimes\win-x86\native\sni.dll
+C:\Users\baral\OneDrive\Desktop\advanced_web\DevBlog\DevBlog.Web\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\baral\OneDrive\Desktop\advanced_web\DevBlog\DevBlog.Web\bin\Debug\net7.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll

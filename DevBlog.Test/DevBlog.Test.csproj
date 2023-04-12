@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DevBlog.Web\DevBlog.Web.csproj" />
+    <ProjectReference Include="..\DevBlog.Library\DevBlog.Library.csproj" />
   </ItemGroup>
 
 </Project>

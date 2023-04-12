@@ -1,101 +1,208 @@
-using DevBlog.Web.Controllers;
 using DevBlog.Web.Data;
 using DevBlog.Web.Models.Domain;
 using DevBlog.Web.Models.ViewModels;
+using DevBlog.Library.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Linq;
+using System.Collections.Generic;
 
-namespace DevBlogIntegration
+namespace DevBlog.Library.Tests.Services
 {
     [TestClass]
-    public class TagDataIntegrationTest
-
+    public class TagDataServicesIntegrationTests
     {
-        private DbContextOptions<BlogDbContext> options;
-        private BlogDbContext context;
+        private BlogDbContext _dbContext;
+        private TagDataServices _tagDataServices;
 
         [TestInitialize]
-        public void Setup()
+        public void Initialize()
         {
-            // Setup in-memory database for testing
-            options = new DbContextOptionsBuilder<BlogDbContext>()
-                .UseInMemoryDatabase("TestDatabase")
+            var options = new DbContextOptionsBuilder<BlogDbContext>()
+                .UseInMemoryDatabase(databaseName: "TestDatabase")
                 .Options;
 
-            context = new BlogDbContext(options);
+            _dbContext = new BlogDbContext(options);
+            _tagDataServices = new TagDataServices(_dbContext);
+        }
 
-            // Seed database with test data
-            var tags = new[]
+        [TestMethod]
+        public void AddTag_Should_Return_True_When_Adding_Valid_Tag()
+        {
+            // Arrange
+            var tag = new Tag
             {
-                new Tag { Id = Guid.NewGuid(), Name = "Tag1", DisplayName = "Tag 1" },
-                new Tag { Id = Guid.NewGuid(), Name = "Tag2", DisplayName = "Tag 2" },
-                new Tag { Id = Guid.NewGuid(), Name = "Tag3", DisplayName = "Tag 3" }
+                Id = Guid.NewGuid(),
+                Name = "TestTag",
+                DisplayName = "Test Tag"
             };
 
-            context.Tags.AddRange(tags);
-            context.SaveChanges();
+            // Act
+            var result = _tagDataServices.AddTag(tag);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void ListTags_Should_Return_All_Tags()
+        {
+            // Arrange
+            var tags = new List<Tag>
+            {
+                new Tag
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Tag1",
+                    DisplayName = "Tag 1"
+                },
+                new Tag
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Tag2",
+                    DisplayName = "Tag 2"
+                },
+                new Tag
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Tag3",
+                    DisplayName = "Tag 3"
+                }
+            };
+            _dbContext.Tags.AddRange(tags);
+            _dbContext.SaveChanges();
+
+            // Act
+            var result = _tagDataServices.ListTags();
+
+            // Assert
+            Assert.AreEqual(tags.Count, result.Count);
+        }
+
+        [TestMethod]
+        public void GetTag_Should_Return_EditTagRequest_For_Valid_Tag_Id()
+        {
+            // Arrange
+            var tag = new Tag
+            {
+                Id = Guid.NewGuid(),
+                Name = "TestTag",
+                DisplayName = "Test Tag"
+            };
+            _dbContext.Tags.Add(tag);
+            _dbContext.SaveChanges();
+
+            // Act
+            var result = _tagDataServices.GetTag(tag.Id);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(tag.Id, result?.Id);
+            Assert.AreEqual(tag.Name, result?.Name);
+            Assert.AreEqual(tag.DisplayName, result?.DisplayName);
+        }
+
+        [TestMethod]
+        public void GetTag_Should_Return_Null_For_Invalid_Tag_Id()
+        {
+            // Arrange
+            var tagId = Guid.NewGuid();
+
+            // Act
+            var result = _tagDataServices.GetTag(tagId);
+
+            // Assert
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void EditTag_Should_Return_True_For_Valid_EditTagRequest()
+        {
+            // Arrange
+            var tag = new Tag
+            {
+                Id = Guid.NewGuid(),
+                Name = "TestTag",
+                DisplayName = "Test Tag"
+            };
+            _dbContext.Tags.Add(tag);
+            _dbContext.SaveChanges();
+
+            var editTagRequest = new EditTagRequest
+            {
+                Id = tag.Id,
+                Name = "NewTestTag",
+                DisplayName = "New Test Tag"
+            };
+
+            // Act
+            var result = _tagDataServices.EditTag(editTagRequest);
+
+            // Assert
+            Assert.IsTrue(result);
+            Assert.AreEqual(editTagRequest.Name, tag.Name);
+            Assert.AreEqual(editTagRequest.DisplayName, tag.DisplayName);
+        }
+
+        [TestMethod]
+        public void EditTag_Should_Return_False_For_Invalid_EditTagRequest()
+        {
+            // Arrange
+            var editTagRequest = new EditTagRequest
+            {
+                Id = Guid.NewGuid(),
+                Name = "NewTestTag",
+                DisplayName = "New Test Tag"
+            };
+
+            // Act
+            var result = _tagDataServices.EditTag(editTagRequest);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void DeleteTag_Should_Return_True_For_Valid_Tag_Id()
+        {
+            // Arrange
+            var tag = new Tag
+            {
+                Id = Guid.NewGuid(),
+                Name = "TestTag",
+                DisplayName = "Test Tag"
+            };
+            _dbContext.Tags.Add(tag);
+            _dbContext.SaveChanges();
+
+            // Act
+            var result = _tagDataServices.DeleteTag(tag.Id);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void DeleteTag_Should_Return_False_For_Invalid_Tag_Id()
+        {
+            // Arrange
+            var tagId = Guid.NewGuid();
+
+            // Act
+            var result = _tagDataServices.DeleteTag(tagId);
+
+            // Assert
+            Assert.IsFalse(result);
         }
 
         [TestCleanup]
         public void Cleanup()
         {
-            // Cleanup in-memory database after testing
-            context.Database.EnsureDeleted();
-            context.Dispose();
-        }
-
-        [TestMethod]
-        public void TestAddTag()
-        {
-            // Arrange
-            var controller = new AdminTagsController(context);
-            var addTagRequest = new AddTagRequest { Name = "Tag4", DisplayName = "Tag 4" };
-
-            // Act
-            controller.Add(addTagRequest);
-
-            // Assert
-            var tags = context.Tags.ToList();
-            Assert.AreEqual(4, tags.Count);
-            var addedTag = tags.FirstOrDefault(x => x.Name == "Tag4");
-            Assert.IsNotNull(addedTag);
-            Assert.AreEqual("Tag 4", addedTag.DisplayName);
-        }
-
-        [TestMethod]
-        public void TestEditTag()
-        {
-            // Arrange
-            var controller = new AdminTagsController(context);
-            var tagToEdit = context.Tags.First();
-            var editTagRequest = new EditTagRequest { Id = tagToEdit.Id, Name = "Tag1_New", DisplayName = "Tag 1 New" };
-
-            // Act
-            controller.Edit(editTagRequest);
-
-            // Assert
-            var editedTag = context.Tags.Find(tagToEdit.Id);
-            Assert.AreEqual("Tag1_New", editedTag.Name);
-            Assert.AreEqual("Tag 1 New", editedTag.DisplayName);
-        }
-
-        [TestMethod]
-        public void TestDeleteTag()
-        {
-            // Arrange
-            var controller = new AdminTagsController(context);
-            var tagToDelete = context.Tags.First();
-
-            // Act
-            controller.Delete(new EditTagRequest { Id = tagToDelete.Id });
-
-            // Assert
-            var deletedTag = context.Tags.Find(tagToDelete.Id);
-            Assert.IsNull(deletedTag);
-            var tags = context.Tags.ToList();
-            Assert.AreEqual(2, tags.Count);
+            _dbContext.Database.EnsureDeleted();
+            _dbContext.Dispose();
         }
     }
 }
+
+
+
