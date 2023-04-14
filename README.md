@@ -8,3 +8,7 @@
 # Added library class and added classes but cannot implement it for unit testing. Only 3 test cases passed when I did that.
 # I did unit testing and integration test both via controller from my main project.
 # Got one day extension to complete check-in
+# All written services code were moved inside project library.
+# Model were moved inside project library.
+# Unit Test and Integration testing were created and run by using project library.
+
