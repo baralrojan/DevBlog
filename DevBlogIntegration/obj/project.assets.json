@@ -9206,11 +9206,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog\\DevBlogIntegration\\DevBlogIntegration.csproj",
+      "projectUniqueName": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlogIntegration\\DevBlogIntegration.csproj",
       "projectName": "DevBlogIntegration",
-      "projectPath": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog\\DevBlogIntegration\\DevBlogIntegration.csproj",
+      "projectPath": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlogIntegration\\DevBlogIntegration.csproj",
       "packagesPath": "C:\\Users\\baral\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog\\DevBlogIntegration\\obj\\",
+      "outputPath": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlogIntegration\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -9232,8 +9232,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog\\DevBlog.Library\\DevBlog.Library.csproj": {
-              "projectPath": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog\\DevBlog.Library\\DevBlog.Library.csproj"
+            "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog.Library\\DevBlog.Library.csproj": {
+              "projectPath": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog.Library\\DevBlog.Library.csproj"
             }
           }
         }

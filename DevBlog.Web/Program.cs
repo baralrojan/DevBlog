@@ -12,7 +12,7 @@ builder.Services.AddScoped<ITagServices,TagServices>();
 builder.Services.AddDbContext<BlogDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("BlogDbConnectionString"),
                      options => options.MigrationsAssembly("DevBlog.Web")));
-
+builder.Services.AddScoped<IBlogPostService, BlogPostServices>();
 
 var app = builder.Build();
 

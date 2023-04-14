@@ -1,0 +1,92 @@
+using DevBlog.Library;
+using Microsoft.EntityFrameworkCore;
+
+namespace DevBlog.Test
+{
+    [TestClass]
+    public class TagDataUnitTest
+    {
+        private BlogDbContext _context;
+        private AdminTagsController _controller;
+        public TagDataLibrary TagData;
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            var options = new DbContextOptionsBuilder<BlogDbContext>()
+                .UseInMemoryDatabase(databaseName: "DevBlogDb")
+                .Options;
+            _context = new BlogDbContext(options);
+            _controller = new AdminTagsController(_context);
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            _context.Database.EnsureDeleted();
+            _context.Dispose();
+        }
+
+        [TestMethod]
+        public void Add_Get_ReturnsView()
+        {
+            // Act
+            var result = _controller.Add() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(null, result.ViewName);
+        }
+
+        [TestMethod]
+        public void Add_Post_AddsTagToDatabaseAndRedirectsToList()
+        {
+            // Arrange
+            var addTagRequest = new AddTagRequest
+            {
+                Name = "Test Tag",
+                DisplayName = "Test Tag Display Name"
+            };
+
+            // Act
+            var result = _controller.Add(addTagRequest) as RedirectToActionResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("List", result.ActionName);
+
+            var tags = _context.Tags.ToList();
+            Assert.AreEqual(1, tags.Count);
+            Assert.AreEqual("Test Tag", tags[0].Name);
+            Assert.AreEqual("Test Tag Display Name", tags[0].DisplayName);
+        }
+
+        [TestMethod]
+        public void List_ReturnsViewWithTags()
+        {
+            // Arrange
+            var tags = new List<Tag>
+            {
+                new Tag { Name = "Tag 1", DisplayName = "Tag 1 Display Name" },
+                new Tag { Name = "Tag 2", DisplayName = "Tag 2 Display Name" }
+            };
+            _context.Tags.AddRange(tags);
+            _context.SaveChanges();
+
+            // Act
+            var result = _controller.List() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(null, result.ViewName);
+
+            var model = result.Model as List<Tag>;
+            Assert.IsNotNull(model);
+            Assert.AreEqual(2, model.Count);
+            Assert.AreEqual("Tag 1", model[0].Name);
+            Assert.AreEqual("Tag 1 Display Name", model[0].DisplayName);
+            Assert.AreEqual("Tag 2", model[1].Name);
+            Assert.AreEqual("Tag 2 Display Name", model[1].DisplayName);
+        }
+    }
+}

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "c77dTpLxiE6I8xy0G72ru43LDZTLikCMP346QvG0lQLgZliYXUJQfL02l2ysEfmpp1gfxQq75orzH44QuZfXhg==",
+  "dgSpecHash": "ctGTC4iPLuqrcLIhKA6+qAiYQnt6NWqtaI1M2IQl4XKrKALknS1yw81xsykasSf4s6RXguL3J8V2457NQcY7vw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog\\DevBlogIntegration\\DevBlogIntegration.csproj",
+  "projectFilePath": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlogIntegration\\DevBlogIntegration.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\baral\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
     "C:\\Users\\baral\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",

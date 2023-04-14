@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog\\DevBlog.Test\\DevBlog.Test.csproj": {}
+    "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog.Test\\DevBlog.Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog\\DevBlog.Library\\DevBlog.Library.csproj": {
+    "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog.Library\\DevBlog.Library.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog\\DevBlog.Library\\DevBlog.Library.csproj",
+        "projectUniqueName": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog.Library\\DevBlog.Library.csproj",
         "projectName": "DevBlog.Library",
-        "projectPath": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog\\DevBlog.Library\\DevBlog.Library.csproj",
+        "projectPath": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog.Library\\DevBlog.Library.csproj",
         "packagesPath": "C:\\Users\\baral\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog\\DevBlog.Library\\obj\\",
+        "outputPath": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog.Library\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -94,14 +94,14 @@
         }
       }
     },
-    "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog\\DevBlog.Test\\DevBlog.Test.csproj": {
+    "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog.Test\\DevBlog.Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog\\DevBlog.Test\\DevBlog.Test.csproj",
+        "projectUniqueName": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog.Test\\DevBlog.Test.csproj",
         "projectName": "DevBlog.Test",
-        "projectPath": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog\\DevBlog.Test\\DevBlog.Test.csproj",
+        "projectPath": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog.Test\\DevBlog.Test.csproj",
         "packagesPath": "C:\\Users\\baral\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog\\DevBlog.Test\\obj\\",
+        "outputPath": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog.Test\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -123,8 +123,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog\\DevBlog.Library\\DevBlog.Library.csproj": {
-                "projectPath": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog\\DevBlog.Library\\DevBlog.Library.csproj"
+              "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog.Library\\DevBlog.Library.csproj": {
+                "projectPath": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog.Library\\DevBlog.Library.csproj"
               }
             }
           }
