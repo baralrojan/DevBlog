@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kcmQTYNqt4Y5hvPg2iXVXGx0qU9BPgs8EgJKMTLK28BFnI8Nx0EVPKW9iB5jISoEgfyqFCMKVIapK4iPwONizQ==",
+  "dgSpecHash": "qOCqMve61mT/UBxrLyf3Z8bHyeAJlUJaIElMqZll0Uokcrqsy0ICUHPd3gjIChx+uuH4evpd8vl1A9F7OvwIHQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog.Library\\DevBlog.Library.csproj",
+  "projectFilePath": "C:\\Users\\baral\\OneDrive\\Desktop\\final\\DevBlog.Library\\DevBlog.Library.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\baral\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\baral\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

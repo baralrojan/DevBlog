@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2DGRrEJgUHcxpNCkHcx9MqajmF6hEk7T0xM4iUjAjiGpSiq6DqFHWTGNYIxzYlpQff7VYPBYmDjTFv21P7vVlw==",
+  "dgSpecHash": "Nn6V5w3tE8ANaXirrLfdjqV3jiSjy4EundPfnHcSJBp2YdulU0+CtMvovNqL68hLCl00m6nFdJyQfZEUy5DptQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\baral\\OneDrive\\Desktop\\advanced_web\\DevBlog.Web\\DevBlog.Web.csproj",
+  "projectFilePath": "C:\\Users\\baral\\OneDrive\\Desktop\\final\\DevBlog.Web\\DevBlog.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\baral\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\baral\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
