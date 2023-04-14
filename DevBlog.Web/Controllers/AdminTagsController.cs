@@ -11,11 +11,9 @@ namespace DevBlog.Web.Controllers
 
     public class AdminTagsController : Controller
     {
-        private readonly BlogDbContext blogDbContext;
-        private readonly TagDataServices tagDataServices;
-        public AdminTagsController(BlogDbContext blogDbContext,TagDataServices tagDataServices)
+        private readonly ITagServices tagDataServices;
+        public AdminTagsController(ITagServices tagDataServices)
         {
-            this.blogDbContext= blogDbContext;
             this.tagDataServices= tagDataServices;
         }
         [HttpGet]
@@ -27,7 +25,7 @@ namespace DevBlog.Web.Controllers
         [HttpPost]
         [ActionName("Add")]
         //Add Tag Data
-        public IActionResult Add(AddTagRequest addTagRequest)
+        public async Task<IActionResult> Add(AddTagRequest addTagRequest)
         {
             //Mapping AddTagRequest to Tag domain model
             var tag = new Tag
@@ -36,7 +34,7 @@ namespace DevBlog.Web.Controllers
                 DisplayName = addTagRequest.DisplayName,
             };
 
-            bool result = tagDataServices.AddTag(tag);
+            await tagDataServices.AddAsync(tag);         
             //Context save to database
             return RedirectToAction("List");
         }
@@ -44,48 +42,67 @@ namespace DevBlog.Web.Controllers
         [HttpGet]
         [ActionName("List")]
         //List or View Tag Data
-        public IActionResult List() 
+        public async Task<IActionResult> List() 
         {
             //use dbContext to read the tags
-            var tags = tagDataServices.ListTags();
+            var tags = await tagDataServices.GetAllAsync();
             return View(tags);
         }
 
         [HttpGet]
         //Get Tag Data
-        public IActionResult Edit(Guid Id)
+        public async Task<IActionResult> Edit(Guid Id)
         {
-            var tag = tagDataServices.GetTag(Id);
+            var tag = await tagDataServices.GetAsync(Id);
             if(tag!=null) 
             {
-                return View(tag);
+                var editTagRequest = new EditTagRequest
+                {
+                    Id = tag.Id,
+                    Name = tag.Name,
+                    DisplayName = tag.DisplayName
+                };
+                return View(editTagRequest);
             }
             return View(null);
         }
 
         [HttpPost]
         //Edit Tag Data
-        public IActionResult Edit(EditTagRequest editTagRequest)
+        public async Task<IActionResult> Edit(EditTagRequest editTagRequest)
         {
-            if (tagDataServices.EditTag(editTagRequest))
+            var tag = new Tag
             {
+                Id = editTagRequest.Id,
+                Name = editTagRequest.Name,
+                DisplayName = editTagRequest.DisplayName
+            };
+            var updatedTag = await tagDataServices.UpdateAsync(tag);
+            if(updatedTag!=null)
+            {
+                //Show Success Message
                 return RedirectToAction("List");
             }
+            else
+            {
+                // Show Error Message
+            }
 
-            // handle case when tag not found
-            return NotFound();
+            return RedirectToAction("Edit", new { id = editTagRequest.Id});
         }
 
 
         //Delete Tag Data
-        public IActionResult Delete(EditTagRequest editTagRequest)
+        public async Task<IActionResult> Delete(EditTagRequest editTagRequest)
         {
-            var result = tagDataServices.DeleteTag(editTagRequest.Id);
-
-            if(result)
+            var deletedTag = await tagDataServices.DeleteAsync(editTagRequest.Id);
+            if(deletedTag!=null)
             {
+                //Show Success Message
                 return RedirectToAction("List");
             }
+
+            //Show Error Message
             return RedirectToAction("Edit", new {id = editTagRequest.Id});
         }
 

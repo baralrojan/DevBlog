@@ -1,222 +1,179 @@
+using DevBlog.Library.Services;
 using DevBlog.Web.Data;
 using DevBlog.Web.Models.Domain;
-using DevBlog.Web.Models.ViewModels;
-using DevBlog.Library.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DevBlog.Library.Tests.Services
 {
     [TestClass]
-    public class TagDataServicesTests
+    public class TagServicesTests
     {
-        private readonly DbContextOptions<BlogDbContext> options = new DbContextOptionsBuilder<BlogDbContext>()
-            .UseInMemoryDatabase(databaseName: "BlogTestDatabase")
-            .Options;
+        private BlogDbContext _dbContext;
+        private ITagServices _tagServices;
 
-        [TestMethod]
-        public void AddTag_Should_Return_True()
+        [TestInitialize]
+        public void Initialize()
         {
-            // Arrange
-            using (var context = new BlogDbContext(options))
-            {
-                var service = new TagDataServices(context);
+            // Create an in-memory database for testing purposes
+            var options = new DbContextOptionsBuilder<BlogDbContext>()
+                .UseInMemoryDatabase("TestTagDatabase")
+                .Options;
 
-                var tag = new Tag
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "test tag",
-                    DisplayName = "Test Tag"
-                };
-
-                // Act
-                var result = service.AddTag(tag);
-
-                // Assert
-                Assert.IsTrue(result);
-            }
+            _dbContext = new BlogDbContext(options);
+            _tagServices = new TagServices(_dbContext);
         }
 
         [TestMethod]
-        public void ListTags_Should_Return_List_Of_Tags()
+        public async Task GetAllAsync_ReturnsAllTags()
         {
             // Arrange
-            using (var context = new BlogDbContext(options))
+            var tags = new List<Tag>
             {
-                var service = new TagDataServices(context);
+                new Tag { Id = Guid.NewGuid(), Name = "tag1", DisplayName = "Tag 1" },
+                new Tag { Id = Guid.NewGuid(), Name = "tag2", DisplayName = "Tag 2" },
+                new Tag { Id = Guid.NewGuid(), Name = "tag3", DisplayName = "Tag 3" }
+            };
+            await _dbContext.Tags.AddRangeAsync(tags);
+            await _dbContext.SaveChangesAsync();
 
-                var tag1 = new Tag
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "test tag 1",
-                    DisplayName = "Test Tag 1"
-                };
+            // Act
+            var result = await _tagServices.GetAllAsync();
 
-              
-
-                context.Tags.Add(tag1);
-                context.SaveChanges();
-
-                // Act
-                var result = service.ListTags();
-
-                // Assert
-                Assert.IsNotNull(result);
-                Assert.AreEqual(2, result.Count);
-                Assert.IsTrue(result.Any(x => x.Id == tag1.Id && x.Name == tag1.Name && x.DisplayName == tag1.DisplayName));
-            }
+            // Assert
+            Assert.AreEqual(tags.Count, result.Count());
+            CollectionAssert.AreEquivalent(tags, result.ToList());
         }
 
         [TestMethod]
-        public void GetTag_Should_Return_EditTagRequest_IfExists()
+        public async Task GetAsync_ReturnsExistingTag()
         {
             // Arrange
-            using (var context = new BlogDbContext(options))
-            {
-                var service = new TagDataServices(context);
+            var tag = new Tag { Id = Guid.NewGuid(), Name = "tag1", DisplayName = "Tag 1" };
+            await _dbContext.Tags.AddAsync(tag);
+            await _dbContext.SaveChangesAsync();
 
-                var tag = new Tag
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "test tag",
-                    DisplayName = "Test Tag"
-                };
+            // Act
+            var result = await _tagServices.GetAsync(tag.Id);
 
-                context.Tags.Add(tag);
-                context.SaveChanges();
-
-                // Act
-                var result = service.GetTag(tag.Id);
-
-                // Assert
-                Assert.IsNotNull(result);
-                Assert.AreEqual(tag.Id, result.Id);
-                Assert.AreEqual(tag.Name, result.Name);
-                Assert.AreEqual(tag.DisplayName, result.DisplayName);
-            }
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(tag.Id, result.Id);
+            Assert.AreEqual(tag.Name, result.Name);
+            Assert.AreEqual(tag.DisplayName, result.DisplayName);
         }
 
         [TestMethod]
-        public void GetTag_Should_Return_Null_IfNotExists()
+        public async Task GetAsync_ReturnsNullForNonExistingTag()
         {
             // Arrange
-            using (var context = new BlogDbContext(options))
-            {
-                var service = new TagDataServices(context);
+            var nonExistingId = Guid.NewGuid();
 
-                // Act
-                var result = service.GetTag(Guid.NewGuid());
+            // Act
+            var result = await _tagServices.GetAsync(nonExistingId);
 
-                // Assert
-                Assert.IsNull(result);
-            }
+            // Assert
+            Assert.IsNull(result);
         }
 
         [TestMethod]
-        public void EditTag_Should_Return_True_IfTagExists()
+        public async Task AddAsync_AddsNewTag()
         {
             // Arrange
-            using (var context = new BlogDbContext(options))
-            {
-                var service = new TagDataServices(context);
+            var tag = new Tag { Name = "tag1", DisplayName = "Tag 1" };
 
-                var tag = new Tag
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "test tag",
-                    DisplayName = "Test Tag"
-                };
+            // Act
+            var result = await _tagServices.AddAsync(tag);
 
-                context.Tags.Add(tag);
-                context.SaveChanges();
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(tag.Name, result.Name);
+            Assert.AreEqual(tag.DisplayName, result.DisplayName);
+            Assert.IsNotNull(result.Id);
+            Assert.AreNotEqual(Guid.Empty, result.Id);
 
-                var editTagRequest = new EditTagRequest
-                {
-                    Id = tag.Id,
-                    Name = "new test tag name",
-                    DisplayName = "New Test Tag Name"
-                };
-
-                // Act
-                var result = service.EditTag(editTagRequest);
-
-                // Assert
-                Assert.IsTrue(result);
-                Assert.AreEqual("new test tag name", context.Tags.First().Name);
-                Assert.AreEqual("New Test Tag Name", context.Tags.First().DisplayName);
-            }
+            var addedTag = await _dbContext.Tags.FindAsync(result.Id);
+            Assert.IsNotNull(addedTag);
+            Assert.AreEqual(tag.Name, addedTag.Name);
+            Assert.AreEqual(tag.DisplayName, addedTag.DisplayName);
         }
 
         [TestMethod]
-        public void EditTag_Should_Return_False_IfTagDoesNotExist()
+        public async Task UpdateAsync_UpdatesExistingTag()
         {
             // Arrange
-            using (var context = new BlogDbContext(options))
-            {
-                var service = new TagDataServices(context);
+            var tag = new Tag { Name = "tag1", DisplayName = "Tag 1" };
+            await _dbContext.Tags.AddAsync(tag);
+            await _dbContext.SaveChangesAsync();
 
-                var editTagRequest = new EditTagRequest
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "new test tag name",
-                    DisplayName = "New Test Tag Name"
-                };
+            var updatedTag = new Tag { Id = tag.Id, Name = "updated-tag1", DisplayName = "Updated Tag 1" };
 
-                // Act
-                var result = service.EditTag(editTagRequest);
+            // Act
+            var result = await _tagServices.UpdateAsync(updatedTag);
 
-                // Assert
-                Assert.IsFalse(result);
-            }
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(updatedTag.Id, result.Id);
+            Assert.AreEqual(updatedTag.Name, result.Name);
+            Assert.AreEqual(updatedTag.DisplayName, result.DisplayName);
+
+            var updatedEntity = await _dbContext.Tags.FindAsync(updatedTag.Id);
+            Assert.IsNotNull(updatedEntity);
+            Assert.AreEqual(updatedTag.Name, updatedEntity.Name);
+            Assert.AreEqual(updatedTag.DisplayName, updatedEntity.DisplayName);
         }
 
         [TestMethod]
-        public void DeleteTag_Should_Return_True_IfTagExists()
+        public async Task UpdateAsync_ReturnsNullForNonExistingTag()
         {
             // Arrange
-            using (var context = new BlogDbContext(options))
-            {
-                var service = new TagDataServices(context);
+            var nonExistingTag = new Tag { Id = Guid.NewGuid(), Name = "non-existing-tag", DisplayName = "Non-existing Tag" };
 
-                var tag = new Tag
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "test tag",
-                    DisplayName = "Test Tag"
-                };
+            // Act
+            var result = await _tagServices.UpdateAsync(nonExistingTag);
 
-                context.Tags.Add(tag);
-                context.SaveChanges();
-
-                // Act
-                var result = service.DeleteTag(tag.Id);
-                Console.WriteLine(result);
-
-                // Assert
-                Assert.IsTrue(result);
-                Assert.AreEqual(1, context.Tags.Count());
-            }
+            // Assert
+            Assert.IsNull(result);
         }
 
         [TestMethod]
-        public void DeleteTag_Should_Return_False_IfTagDoesNotExist()
+        public async Task DeleteAsync_DeletesExistingTag()
         {
             // Arrange
-            using (var context = new BlogDbContext(options))
-            {
-                var service = new TagDataServices(context);
+            var tag = new Tag { Name = "tag1", DisplayName = "Tag 1" };
+            await _dbContext.Tags.AddAsync(tag);
+            await _dbContext.SaveChangesAsync();
 
-                // Act
-                var result = service.DeleteTag(Guid.NewGuid());
+            // Act
+            var result = await _tagServices.DeleteAsync(tag.Id);
 
-                // Assert
-                Assert.IsFalse(result);
-            }
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(tag.Id, result.Id);
+            Assert.AreEqual(tag.Name, result.Name);
+            Assert.AreEqual(tag.DisplayName, result.DisplayName);
+
+            var deletedEntity = await _dbContext.Tags.FindAsync(tag.Id);
+            Assert.IsNull(deletedEntity);
+        }
+
+        [TestMethod]
+        public async Task DeleteAsync_ReturnsNullForNonExistingTag()
+        {
+            // Arrange
+            var nonExistingId = Guid.NewGuid();
+
+            // Act
+            var result = await _tagServices.DeleteAsync(nonExistingId);
+
+            // Assert
+            Assert.IsNull(result);
         }
     }
+
 }
-
-
