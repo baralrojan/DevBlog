@@ -13,4 +13,5 @@
 # Unit Test and Integration testing were created and run by using project library.
 # For both testing I have used an in-memory database.
 # GetAllAsync_ReturnsAllTags test was failed, becuase I wanted it to fail. The assert should be set to NotEqual to pass the test.
+# To add migration and update database I have used EntityFrameworkCore\Add-Migration and EntityFrameworkCore\Update-Database because I messed up somewhere therefore Add-Migration and Update-Database is throwing error. 
 
