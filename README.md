@@ -15,4 +15,7 @@
 # GetAllAsync_ReturnsAllTags test was failed, becuase I wanted it to fail. The assert should be set to NotEqual to pass the test.
 # To add migration and update database I have used EntityFrameworkCore\Add-Migration and EntityFrameworkCore\Update-Database because I messed up somewhere therefore Add-Migration and Update-Database is throwing error. 
 # Integration Test passed for running app on browser using selenium.
+# Data Annotations for forms are added. I commented out URL handle Data notations so that it will be easy to type.
+# I have not yet done upload image and display main page, my backend part was almost complete.
+
 
