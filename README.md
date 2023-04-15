@@ -17,5 +17,6 @@
 # Integration Test passed for running app on browser using selenium.
 # Data Annotations for forms are added. I commented out URL handle Data notations so that it will be easy to type.
 # I have not yet done upload image and display main page, my backend part was almost complete.
+# AddAsync_ShouldAddBlogPost test was failing in unit test because i donot know how to insert selected item while testing
 
 
