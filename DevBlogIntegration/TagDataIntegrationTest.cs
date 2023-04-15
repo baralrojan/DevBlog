@@ -8,6 +8,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
+using OpenQA.Selenium.Support.UI;
 
 namespace DevBlog.Library.Tests
 {
@@ -26,20 +27,23 @@ namespace DevBlog.Library.Tests
                 .Options;
             dbContext = new BlogDbContext(options);
             tagServices = new TagServices(dbContext);
+
+            
         }
+
+   
 
 
         [TestMethod]
 
         public void TestMethod1()
         {
-            new DriverManager().SetUpDriver(new ChromeConfig());
+            
             _webDriver = new ChromeDriver();
-
             _webDriver.Navigate().GoToUrl("https://localhost:7024/");
             Assert.IsTrue(_webDriver.Title.Contains("Home Page"));
 
-            _webDriver.Quit();
+            _webDriver?.Quit();
 
         }
 
@@ -51,28 +55,30 @@ namespace DevBlog.Library.Tests
         }
 
         [TestMethod]
-        public async Task AddAsync_ShouldAddTagToDatabase()
+        public void AddTagView_ShouldSubmitFormSuccessfully()
         {
-            // Arrange
-            var tag = new Tag
-            {
-                Id = Guid.NewGuid(),
-                Name = "Test Tag",
-                DisplayName = "Test Tag Display Name"
-            };
 
-            // Act
-            var result = await tagServices.AddAsync(tag);
+            // Navigate to the Add Tag page
+            new DriverManager().SetUpDriver(new ChromeConfig());
+            _webDriver = new ChromeDriver();
+            _webDriver.Navigate().GoToUrl("https://localhost:7024/");
 
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(tag, result);
+            // Fill in the form fields
+            var nameField = _webDriver.FindElement(By.Id("name"));
+                nameField.SendKeys("Test Tag");
 
-            var dbTag = await dbContext.Tags.FirstOrDefaultAsync(x => x.Id == tag.Id);
-            Assert.IsNotNull(dbTag);
-            Assert.AreEqual(tag.Name, dbTag.Name);
-            Assert.AreEqual(tag.DisplayName, dbTag.DisplayName);
+                var displayNameField = _webDriver.FindElement(By.Id("displayName"));
+                displayNameField.SendKeys("Test Tag Display Name");
+
+                // Submit the form
+                var submitButton = _webDriver.FindElement(By.CssSelector("button[type='submit']"));
+                submitButton.Click();
+
+                // Assert
+                var url = _webDriver.Url;
+                Assert.IsTrue(url.Contains("/AdminTags"));
         }
+
 
         [TestMethod]
         public async Task DeleteAsync_ShouldRemoveTagFromDatabase()

@@ -1,6 +1,7 @@
 ﻿using DevBlog.Library.Models.ViewModels;
 using DevBlog.Library.Services;
 using DevBlog.Web.Models.Domain;
+using DevBlog.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -20,6 +21,7 @@ namespace DevBlog.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
+
             // get tags from repository
             var tags = await tagServices.GetAllAsync();
 
@@ -35,6 +37,11 @@ namespace DevBlog.Web.Controllers
 
         public async Task<IActionResult> Add(AddBlogPostRequest addBlogPostRequest)
         {
+            if (!ModelState.IsValid)
+            {
+                // There are validation errors, display them to the user
+                return View(addBlogPostRequest);
+            }
             var blogPost = new BlogPost
             {
                 Heading = addBlogPostRequest.Heading,
@@ -116,6 +123,11 @@ namespace DevBlog.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EditBlogPostRequest editBlogPostRequest)
         {
+            if (!ModelState.IsValid)
+            {
+                // There are validation errors, display them to the user
+                return View(editBlogPostRequest);
+            }
             // map view model back to domain model
             var blogPostDomainModel = new BlogPost
             {

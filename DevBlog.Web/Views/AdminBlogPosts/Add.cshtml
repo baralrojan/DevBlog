@@ -14,21 +14,25 @@
         <div class="mb-3">
             <label class="form-label">Heading</label>
             <input type="text" class="form-control" id="heading" asp-for="Heading" />
+            @Html.ValidationMessageFor(model => model.Heading)
         </div>
 
         <div class="mb-3">
             <label class="form-label">Page Title</label>
             <input type="text" class="form-control" id="pageTitle" asp-for="PageTitle" />
+            @Html.ValidationMessageFor(model => model.PageTitle)
         </div>
 
         <div class="mb-3">
             <label class="form-label">Content</label>
             <textarea class="form-control" id="content" asp-for="Content"></textarea>
+            @Html.ValidationMessageFor(model => model.Content)
         </div>
 
         <div class="mb-3">
             <label class="form-label">Short Description</label>
             <input type="text" class="form-control" id="shortDescription" asp-for="ShortDescription" />
+            @Html.ValidationMessageFor(model => model.ShortDescription)
         </div>
 
 
@@ -36,21 +40,25 @@
         <div class="mb-3">
             <label class="form-label">Featured Image URL</label>
             <input type="text" class="form-control" id="featuredImageUrl" asp-for="FeaturedImageUrl" />
+            @Html.ValidationMessageFor(model => model.FeaturedImageUrl)
         </div>
 
         <div class="mb-3">
             <label class="form-label">URL Handle</label>
             <input type="text" class="form-control" id="urlHandle" asp-for="UrlHandle" />
+            @Html.ValidationMessageFor(model => model.UrlHandle)
         </div>
 
         <div class="mb-3">
             <label class="form-label">Published Date</label>
             <input type="date" class="form-control" id="publishedDate" asp-for="PublishedDate" />
+            @Html.ValidationMessageFor(model => model.PublishedDate)
         </div>
 
         <div class="mb-3">
             <label class="form-label">Author</label>
             <input type="text" class="form-control" id="author" asp-for="Author" />
+            @Html.ValidationMessageFor(model => model.Author)
         </div>
 
         <div class="form-check mb-3">

@@ -27,17 +27,25 @@ namespace DevBlog.Web.Controllers
         //Add Tag Data
         public async Task<IActionResult> Add(AddTagRequest addTagRequest)
         {
-            //Mapping AddTagRequest to Tag domain model
+            if (!ModelState.IsValid)
+            {
+                // There are validation errors, display them to the user
+                return View(addTagRequest);
+            }
+
+            // Mapping AddTagRequest to Tag domain model
             var tag = new Tag
             {
                 Name = addTagRequest.Name,
                 DisplayName = addTagRequest.DisplayName,
             };
 
-            await tagDataServices.AddAsync(tag);         
-            //Context save to database
+            await tagDataServices.AddAsync(tag);
+
+            // Context save to database
             return RedirectToAction("List");
         }
+
 
         [HttpGet]
         [ActionName("List")]
@@ -71,6 +79,11 @@ namespace DevBlog.Web.Controllers
         //Edit Tag Data
         public async Task<IActionResult> Edit(EditTagRequest editTagRequest)
         {
+            if (!ModelState.IsValid)
+            {
+                // There are validation errors, display them to the user
+                return View(editTagRequest);
+            }
             var tag = new Tag
             {
                 Id = editTagRequest.Id,
@@ -105,9 +118,6 @@ namespace DevBlog.Web.Controllers
             //Show Error Message
             return RedirectToAction("Edit", new {id = editTagRequest.Id});
         }
-
-
-
 
     }
 
