@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tVvhMKawaU6/4ma/bR6uN9I+qmmBBs+j9rZPhIquCKdlwgB63Vzmh08JIA3OxSclQ594JQRFbMFKq44/v8XicQ==",
+  "dgSpecHash": "QKrmZp1nG6n3mXJ6URaUCvSWhVFqyMXosjediK0/wZDW1n5D5r0hgCceg8Fyck61uwWxFzMKTQIvTqRedsgnSQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\baral\\OneDrive\\Desktop\\final\\DevBlog.Test\\DevBlog.Test.csproj",
+  "projectFilePath": "C:\\Users\\baral\\OneDrive\\Desktop\\final1\\DevBlog.Test\\DevBlog.Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\baral\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\baral\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",

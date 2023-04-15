@@ -40,3 +40,17 @@ C:\Users\baral\OneDrive\Desktop\final\DevBlog.Library\obj\Debug\net7.0\refint\De
 C:\Users\baral\OneDrive\Desktop\final\DevBlog.Library\obj\Debug\net7.0\DevBlog.Library.pdb
 C:\Users\baral\OneDrive\Desktop\final\DevBlog.Library\obj\Debug\net7.0\DevBlog.Library.genruntimeconfig.cache
 C:\Users\baral\OneDrive\Desktop\final\DevBlog.Library\obj\Debug\net7.0\ref\DevBlog.Library.dll
+C:\Users\baral\OneDrive\Desktop\final1\DevBlog.Library\bin\Debug\net7.0\DevBlog.Library.deps.json
+C:\Users\baral\OneDrive\Desktop\final1\DevBlog.Library\bin\Debug\net7.0\DevBlog.Library.runtimeconfig.json
+C:\Users\baral\OneDrive\Desktop\final1\DevBlog.Library\bin\Debug\net7.0\DevBlog.Library.dll
+C:\Users\baral\OneDrive\Desktop\final1\DevBlog.Library\bin\Debug\net7.0\DevBlog.Library.pdb
+C:\Users\baral\OneDrive\Desktop\final1\DevBlog.Library\obj\Debug\net7.0\DevBlog.Library.csproj.AssemblyReference.cache
+C:\Users\baral\OneDrive\Desktop\final1\DevBlog.Library\obj\Debug\net7.0\DevBlog.Library.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\baral\OneDrive\Desktop\final1\DevBlog.Library\obj\Debug\net7.0\DevBlog.Library.AssemblyInfoInputs.cache
+C:\Users\baral\OneDrive\Desktop\final1\DevBlog.Library\obj\Debug\net7.0\DevBlog.Library.AssemblyInfo.cs
+C:\Users\baral\OneDrive\Desktop\final1\DevBlog.Library\obj\Debug\net7.0\DevBlog.Library.csproj.CoreCompileInputs.cache
+C:\Users\baral\OneDrive\Desktop\final1\DevBlog.Library\obj\Debug\net7.0\DevBlog.Library.dll
+C:\Users\baral\OneDrive\Desktop\final1\DevBlog.Library\obj\Debug\net7.0\refint\DevBlog.Library.dll
+C:\Users\baral\OneDrive\Desktop\final1\DevBlog.Library\obj\Debug\net7.0\DevBlog.Library.pdb
+C:\Users\baral\OneDrive\Desktop\final1\DevBlog.Library\obj\Debug\net7.0\DevBlog.Library.genruntimeconfig.cache
+C:\Users\baral\OneDrive\Desktop\final1\DevBlog.Library\obj\Debug\net7.0\ref\DevBlog.Library.dll

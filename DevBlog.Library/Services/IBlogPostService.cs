@@ -10,7 +10,7 @@ namespace DevBlog.Library.Services
     public interface IBlogPostService
     {
         Task<IEnumerable<BlogPost>> GetAllAsync();
-        Task<BlogPost?> GetAsync(int id);
+        Task<BlogPost?> GetAsync(Guid id);
         Task<BlogPost> AddAsync(BlogPost blogPost);
         Task<BlogPost?> UpdateAsync(BlogPost blogPost);
         Task<BlogPost?> DeleteAsync(Guid id);
