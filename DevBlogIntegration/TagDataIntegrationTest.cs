@@ -58,23 +58,19 @@ namespace DevBlog.Library.Tests
         public void AddTagView_ShouldSubmitFormSuccessfully()
         {
 
-            // Navigate to the Add Tag page
             new DriverManager().SetUpDriver(new ChromeConfig());
             _webDriver = new ChromeDriver();
-            _webDriver.Navigate().GoToUrl("https://localhost:7024/");
+            _webDriver.Navigate().GoToUrl("https://localhost:7024/AdminTags/Add");
 
-            // Fill in the form fields
             var nameField = _webDriver.FindElement(By.Id("name"));
                 nameField.SendKeys("Test Tag");
 
                 var displayNameField = _webDriver.FindElement(By.Id("displayName"));
                 displayNameField.SendKeys("Test Tag Display Name");
 
-                // Submit the form
                 var submitButton = _webDriver.FindElement(By.CssSelector("button[type='submit']"));
                 submitButton.Click();
 
-                // Assert
                 var url = _webDriver.Url;
                 Assert.IsTrue(url.Contains("/AdminTags"));
         }
@@ -83,7 +79,7 @@ namespace DevBlog.Library.Tests
         [TestMethod]
         public async Task DeleteAsync_ShouldRemoveTagFromDatabase()
         {
-            // Arrange
+
             var tag = new Tag
             {
                 Id = Guid.NewGuid(),
@@ -93,10 +89,8 @@ namespace DevBlog.Library.Tests
             await dbContext.Tags.AddAsync(tag);
             await dbContext.SaveChangesAsync();
 
-            // Act
             var result = await tagServices.DeleteAsync(tag.Id);
 
-            // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(tag, result);
 
@@ -107,7 +101,6 @@ namespace DevBlog.Library.Tests
         [TestMethod]
         public async Task GetAllAsync_ShouldReturnAllTagsFromDatabase()
         {
-            // Arrange
             var tag1 = new Tag
             {
                 Id = Guid.NewGuid(),
@@ -123,10 +116,10 @@ namespace DevBlog.Library.Tests
             await dbContext.Tags.AddRangeAsync(tag1, tag2);
             await dbContext.SaveChangesAsync();
 
-            // Act
+
             var result = await tagServices.GetAllAsync();
 
-            // Assert
+
             Assert.IsNotNull(result);
             Assert.AreEqual(2, result.Count());
 
@@ -144,7 +137,7 @@ namespace DevBlog.Library.Tests
         [TestMethod]
         public async Task GetAsync_ShouldReturnTagFromDatabase()
         {
-            // Arrange
+
             var tag = new Tag
             {
                 Id = Guid.NewGuid(),
@@ -154,10 +147,9 @@ namespace DevBlog.Library.Tests
             await dbContext.Tags.AddAsync(tag);
             await dbContext.SaveChangesAsync();
 
-            // Act
+
             var result = await tagServices.GetAsync(tag.Id);
 
-            // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(tag, result);
             Assert.AreEqual(tag.Name, result.Name);
@@ -167,7 +159,7 @@ namespace DevBlog.Library.Tests
         [TestMethod]
         public async Task UpdateAsync_ShouldUpdateTagInDatabase()
         {
-            // Arrange
+
             var tag = new Tag
             {
                 Id = Guid.NewGuid(),
@@ -184,10 +176,9 @@ namespace DevBlog.Library.Tests
                 DisplayName = "Updated Test Tag Display Name"
             };
 
-            // Act
+
             var result = await tagServices.UpdateAsync(updatedTag);
 
-            // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(tag.Id, result.Id);
             Assert.AreEqual(updatedTag.Name, result.Name);
