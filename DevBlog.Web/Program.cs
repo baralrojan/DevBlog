@@ -13,7 +13,7 @@ builder.Services.AddDbContext<BlogDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("BlogDbConnectionString"),
                      options => options.MigrationsAssembly("DevBlog.Web")));
 builder.Services.AddScoped<IBlogPostService, BlogPostServices>();
-
+builder.Services.AddScoped<IImageServices, CloudImageServices>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

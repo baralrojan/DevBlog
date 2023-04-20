@@ -73,6 +73,8 @@ namespace DevBlog.Library.Tests
 
                 var url = _webDriver.Url;
                 Assert.IsTrue(url.Contains("/AdminTags"));
+
+                _webDriver.Quit();
         }
 
 

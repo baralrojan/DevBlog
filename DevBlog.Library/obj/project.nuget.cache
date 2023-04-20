@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "QWIwqhk3D1q1iAZIwECkM0sNmm7oTJk9RFrT+1g/oQkYnPqTj1Ympd/InoOZx11Kc+Tbv2tm/IGHZGuIBmYdjw==",
+  "dgSpecHash": "3xO++LtcnXcF1uGoeem9AktG4JGA5ANtZQLbBesShL7W5MyY6VrKdEK37DKEk+1+Je0Cn6jXrlbL8cHAbjv1oQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\baral\\OneDrive\\Desktop\\final1\\DevBlog.Library\\DevBlog.Library.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\baral\\.nuget\\packages\\cloudinarydotnet\\1.20.0\\cloudinarydotnet.1.20.0.nupkg.sha512",
     "C:\\Users\\baral\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\baral\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\baral\\.nuget\\packages\\microsoft.aspnet.mvc\\5.2.9\\microsoft.aspnet.mvc.5.2.9.nupkg.sha512",
@@ -67,7 +68,7 @@
     "C:\\Users\\baral\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\baral\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\baral\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
-    "C:\\Users\\baral\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
+    "C:\\Users\\baral\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\baral\\.nuget\\packages\\newtonsoft.json.bson\\1.0.1\\newtonsoft.json.bson.1.0.1.nupkg.sha512",
     "C:\\Users\\baral\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\baral\\.nuget\\packages\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",

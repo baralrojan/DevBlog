@@ -382,3 +382,4 @@ C:\Users\baral\OneDrive\Desktop\final1\DevBlog.Web\obj\Debug\net7.0\refint\DevBl
 C:\Users\baral\OneDrive\Desktop\final1\DevBlog.Web\obj\Debug\net7.0\DevBlog.Web.pdb
 C:\Users\baral\OneDrive\Desktop\final1\DevBlog.Web\obj\Debug\net7.0\DevBlog.Web.genruntimeconfig.cache
 C:\Users\baral\OneDrive\Desktop\final1\DevBlog.Web\obj\Debug\net7.0\ref\DevBlog.Web.dll
+C:\Users\baral\OneDrive\Desktop\final1\DevBlog.Web\bin\Debug\net7.0\CloudinaryDotNet.dll

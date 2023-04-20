@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "ZuPfRs4v8dXK81tGxbCjCyH7WNXXQcjbGxUfgdrOmYR6GWgqBFtvMHV1tkW7cc+5nJeoh8GGldF/wGydLjgWZA==",
+  "dgSpecHash": "wnczWLs7t4biwh/KhMRt25vohZDJIDU2sxw7mYzMoqmkUTsU5JH5MUq0bU5CgDf4M0GUpA/aYynVEDPS/KASMQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\baral\\OneDrive\\Desktop\\final1\\DevBlogIntegration\\DevBlogIntegration.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\baral\\.nuget\\packages\\anglesharp\\0.17.1\\anglesharp.0.17.1.nupkg.sha512",
+    "C:\\Users\\baral\\.nuget\\packages\\cloudinarydotnet\\1.20.0\\cloudinarydotnet.1.20.0.nupkg.sha512",
     "C:\\Users\\baral\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
     "C:\\Users\\baral\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\baral\\.nuget\\packages\\microsoft.aspnet.mvc\\5.2.9\\microsoft.aspnet.mvc.5.2.9.nupkg.sha512",
