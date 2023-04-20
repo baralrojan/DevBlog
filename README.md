@@ -19,6 +19,11 @@
 # I have not yet done upload image and display main page, my backend part was almost complete.
 # AddAsync_ShouldAddBlogPost test was failing in unit test because i donot know how to insert selected item while testing
 # I pushed my last code at 12:12 AM because I found that application is breaking in AddBlog page.
+# Created API and repository for image upload functionality but it is showing error.
+# wysiwyg editor has added to my html page
+# I am using postman and I am not getting any error when I tried to post data through api, it keeps on loading.
+
+
 
 
 
