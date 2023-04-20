@@ -12,11 +12,22 @@ namespace DevBlog.Library.Services
 {
     public class CloudImageServices : IImageServices
     {
- 
+       
+            private readonly IConfiguration configuration;
+            private readonly Account account;
+
+            public CloudImageServices(IConfiguration configuration)
+            {
+                this.configuration = configuration;
+                account = new Account(
+                    configuration.GetSection("Cloudinary")["CloudName"],
+                    configuration.GetSection("Cloudinary")["ApiKey"],
+                    configuration.GetSection("Cloudinary")["ApiSecret"]);
+            }
 
             public async Task<string> UploadAsync(IFormFile file)
             {
-                var client = new Cloudinary(new Account("dq793l6ik", "667142522254299", "2wHvdquNnWEHxHZE4EvEqNvfTw"));
+                var client = new Cloudinary(account);
 
                 var uploadParams = new ImageUploadParams()
                 {
