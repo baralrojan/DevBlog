@@ -22,6 +22,7 @@
 # Created API and repository for image upload functionality but it is showing error.
 # wysiwyg editor has added to my html page
 # I am using postman and I am not getting any error when I tried to post data through api, it keeps on loading.
+# I fixed the issue now it's running.
 
 
 
