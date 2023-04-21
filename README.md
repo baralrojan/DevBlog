@@ -23,6 +23,7 @@
 # wysiwyg editor has added to my html page
 # I am using postman and I am not getting any error when I tried to post data through api, it keeps on loading.
 # I fixed the issue now it's running.
+# wysiwyg editor is throwing error in the console.Not able to upload image and content using textarea
 
 
 
