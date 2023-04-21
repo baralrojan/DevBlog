@@ -15,7 +15,6 @@ namespace DevBlog.Library.Models.ViewModels
         public string PageTitle { get; set; }
 
         [Required(ErrorMessage = "The Content field is required.")]
-        [StringLength(5, ErrorMessage = "The content field must be minimum 5 long.")]
         public string Content { get; set; }
 
         [Required(ErrorMessage = "The Short Description field is required.")]
